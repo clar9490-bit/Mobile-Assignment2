@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         //automatically add new entries
         //just using 1 to represent the 50 entries
         try {
-            addEntry("Toronto, Ontario, Canada","43.89", "-78.87");
+            addEntry("Barrie, Ontario, Canada","43.89", "-78.87");
         } catch (Exception e) {
             Toast.makeText(MainActivity.this, "Cannot find Toronto", Toast.LENGTH_SHORT).show();
         }
@@ -62,19 +62,45 @@ public class MainActivity extends AppCompatActivity {
 
                 DataModel dataModel;
 
+                //try {
+                    //dataModel = new DataModel(-1, text_name.getText().toString(), Float.parseFloat(num_lat.getText().toString()), Float.parseFloat(num_long.getText().toString()));
+
+                   // Toast.makeText(MainActivity.this, dataModel.toString(), Toast.LENGTH_SHORT).show();
+              //  }
+                //catch (Exception e){
+                   // Toast.makeText(MainActivity.this, "Please Fill in all the values correctly", Toast.LENGTH_SHORT).show();
+                 //   dataModel = new DataModel(-1, "error", null, null);
+              //  }
+
+               // try {
+                    //dataModel = new DataModel(-1, text_name.getText().toString(), Float.parseFloat(num_lat.getText().toString()), Float.parseFloat(num_long.getText().toString()));
+                   // addEntry(checkAddress,num_lat.getText().toString(), num_long.getText().toString());
+               // } catch (Exception e) {
+                    // Toast.makeText(MainActivity.this, "Please Fill in all the values correctly", Toast.LENGTH_SHORT).show();
+                    // dataModel = new DataModel(-1, "error", null, null);
+               // }
+
+               // DataBase dataBase = new DataBase(MainActivity.this);
+                //boolean success = dataBase.addOne(dataModel);
+               // Toast.makeText(MainActivity.this, "Success = "+ success, Toast.LENGTH_SHORT).show();
+
                 try {
-                    dataModel = new DataModel(-1, text_name.getText().toString(), Float.parseFloat(num_lat.getText().toString()), Float.parseFloat(num_long.getText().toString()));
+                    addEntry(text_name.getText().toString(),num_lat.getText().toString(), num_long.getText().toString());
+                } catch (Exception e) {
+                    //Toast.makeText(MainActivity.this, "Please Fill in all the values correctly", Toast.LENGTH_SHORT).show();
+                     try {
+                        dataModel = new DataModel(-1, text_name.getText().toString(), Float.parseFloat(num_lat.getText().toString()), Float.parseFloat(num_long.getText().toString()));
+                         addEntry(text_name.getText().toString(),num_lat.getText().toString(), num_long.getText().toString());
+                     } catch (Exception exception) {
+                         Toast.makeText(MainActivity.this, "Please Fill in all the values correctly", Toast.LENGTH_SHORT).show();
+                         dataModel = new DataModel(-1, "error", null, null);
+                     }
 
-                    Toast.makeText(MainActivity.this, dataModel.toString(), Toast.LENGTH_SHORT).show();
-                }
-                catch (Exception e){
-                    Toast.makeText(MainActivity.this, "Please Fill in all the values correctly", Toast.LENGTH_SHORT).show();
-                    dataModel = new DataModel(-1, "error", null, null);
-                }
+                     DataBase dataBase = new DataBase(MainActivity.this);
+                     boolean success = dataBase.addOne(dataModel);
+                     Toast.makeText(MainActivity.this, "Success = "+ success, Toast.LENGTH_SHORT).show();
 
-                DataBase dataBase = new DataBase(MainActivity.this);
-                boolean success = dataBase.addOne(dataModel);
-                Toast.makeText(MainActivity.this, "Success = "+ success, Toast.LENGTH_SHORT).show();
+                }
 
                 upDateResults(dataBase);
 
